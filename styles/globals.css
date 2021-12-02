@@ -105,7 +105,6 @@ form {
 [class*=" rsc-icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: "rsc" !important;
-  speak: never;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -647,77 +646,6 @@ header .container {
   background: rgba(147, 220, 156, 0.15);
 }
 
-@-webkit-keyframes tada {
-  from {
-    -webkit-transform: scale3d(1, 1, 1);
-    transform: scale3d(1, 1, 1);
-    opacity: 0;
-  }
-  10%,
-  20% {
-    -webkit-transform: scale3d(0.8, 0.66, 0.66) rotate3d(0, 0, 1, -3deg);
-    transform: scale3d(0.8, 0.66, 0.66) rotate3d(0, 0, 1, -3deg);
-  }
-  30%,
-  50%,
-  70%,
-  90% {
-    -webkit-transform: scale3d(1.2, 1.2, 1.2) rotate3d(0, 0, 1, 3deg);
-    transform: scale3d(1.2, 1.2, 1.2) rotate3d(0, 0, 1, 3deg);
-  }
-  40%,
-  60%,
-  80% {
-    -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
-    transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
-  }
-  to {
-    -webkit-transform: scale3d(1, 1, 1);
-    transform: scale3d(1, 1, 1);
-    opacity: 1;
-  }
-}
-
-@keyframes tada {
-  from {
-    -webkit-transform: scale3d(1, 1, 1);
-    transform: scale3d(1, 1, 1);
-    opacity: 0;
-  }
-  10%,
-  20% {
-    -webkit-transform: scale3d(0.8, 0.66, 0.66) rotate3d(0, 0, 1, -3deg);
-    transform: scale3d(0.8, 0.66, 0.66) rotate3d(0, 0, 1, -3deg);
-  }
-  30%,
-  50%,
-  70%,
-  90% {
-    -webkit-transform: scale3d(1.2, 1.2, 1.2) rotate3d(0, 0, 1, 3deg);
-    transform: scale3d(1.2, 1.2, 1.2) rotate3d(0, 0, 1, 3deg);
-  }
-  40%,
-  60%,
-  80% {
-    -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
-    transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
-  }
-  to {
-    -webkit-transform: scale3d(1, 1, 1);
-    transform: scale3d(1, 1, 1);
-    opacity: 1;
-  }
-}
-
-.tada {
-  -webkit-animation-name: tada;
-  animation-name: tada;
-  -webkit-animation-duration: 300ms;
-  animation-duration: 300ms;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-}
-
 .form-group {
   margin-bottom: 16px;
 }
@@ -1104,8 +1032,6 @@ header .container {
   color: inherit;
   font-size: 24px;
   line-height: 22px;
-  -moz-user-select: none;
-  -webkit-user-select: none;
 }
 
 .stepper-input .increment:hover,

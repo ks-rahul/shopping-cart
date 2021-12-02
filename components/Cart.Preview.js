@@ -48,11 +48,17 @@ const CartPreview = () => {
               <p className="quantity">
                 <button
                   type="button"
-                  className="btn btn-primary"
+                  className={`btn btn-${
+                    product.quantity === 1 ? "danger" : "primary"
+                  }`}
                   disabled={product.quantity === 1}
-                  onClick={() => handleRemoveExisting(product.id)}
+                  onClick={() => {
+                    product.quantity === 1
+                      ? handleRemove(product.id)
+                      : handleRemoveExisting(product.id);
+                  }}
                 >
-                  -
+                  {product.quantity === 1 ? "x" : "-"}
                 </button>
                 <span>{`${product.quantity} ${
                   product.quantity > 1 ? "Nos." : "No."

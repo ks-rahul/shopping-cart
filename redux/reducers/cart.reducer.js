@@ -1,3 +1,5 @@
+import { HYDRATE } from "next-redux-wrapper";
+
 import {
   TOGGLE_CART_POPUP,
   ADD_TO_CART,
@@ -14,11 +16,15 @@ const initialState = {
 
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
+    case HYDRATE:
+      return { ...state, ...action.payload };
+
     case TOGGLE_CART_POPUP:
       return {
         ...state,
         isCartOpen: !state.isCartOpen,
       };
+
     case ADD_TO_CART:
       const id = action.payload.cartItem.id;
       const isOld = state.items.map((item) => item.id).includes(id);
@@ -41,6 +47,7 @@ const cartReducer = (state = initialState, action) => {
         ...state,
         items: cartItems,
       };
+
     case ADD_ITEM:
       const updateItems = state.items.map((item) => {
         if (item.id === action.payload.id) {
@@ -52,6 +59,7 @@ const cartReducer = (state = initialState, action) => {
         return item;
       });
       return { ...state, items: updateItems };
+
     case SUBTRACT_ITEM:
       const updatedItems = state.items.map((item) => {
         if (item.id === action.payload.id && item.quantity > 1) {
@@ -63,6 +71,7 @@ const cartReducer = (state = initialState, action) => {
         return item;
       });
       return { ...state, items: updatedItems };
+
     case REMOVE_FROM_CART:
       return {
         ...state,
@@ -70,11 +79,13 @@ const cartReducer = (state = initialState, action) => {
           (item) => item.id !== action.payload.cartItemId
         ),
       };
+
     case CLEAR_CART:
       return {
         ...state,
         ...initialState,
       };
+
     default:
       return state;
   }

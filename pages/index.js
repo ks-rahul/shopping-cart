@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { connect } from "react-redux";
 
@@ -7,11 +8,20 @@ import ProductCard from "../components/ProductCard";
 import { getProducts } from "../redux/actions/product.actions";
 
 function Home({ getProductsList, products }) {
+  const router = useRouter();
+
   useEffect(() => {
     if (products.length === 0) {
       getProductsList();
     }
-  }, []);
+  }, [getProductsList, products.length]);
+
+  useEffect(() => {
+    let tc = localStorage.getItem("user");
+    if (!tc) {
+      router.push("/login");
+    }
+  }, [router]);
 
   return (
     <Layout title="Home">

@@ -1,22 +1,25 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import Layout from "../components/Layout";
 
 import { signIn } from "../redux/actions/auth.actions";
 
-const Login = ({ signIn }) => {
+const Login = () => {
   const [userData, setUserData] = useState({ email: "", password: "" });
 
   const router = useRouter();
+  const dispatch = useDispatch();
+
+  const signInHandle = (data) => dispatch(signIn());
 
   useEffect(() => {
     const user = localStorage.getItem("user");
     if (user) {
       router.push("/");
     }
-  }, []);
+  }, [router]);
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
@@ -26,7 +29,7 @@ const Login = ({ signIn }) => {
       return;
     }
 
-    signIn(userData);
+    signInHandle(userData);
     router.push("/");
   };
 
@@ -58,10 +61,7 @@ const Login = ({ signIn }) => {
                 />
               </div>
               <div className="form-group">
-                <label
-                  htmlFor="passwordInput"
-                  className="form-label mt-4"
-                >
+                <label htmlFor="passwordInput" className="form-label mt-4">
                   Password
                 </label>
                 <input
@@ -91,10 +91,4 @@ const Login = ({ signIn }) => {
   );
 };
 
-function mapStateToProps(state) {}
-
-function mapDispatchToProps(dispatch) {
-  return { signIn: (data) => dispatch(signIn(data)) };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default Login;

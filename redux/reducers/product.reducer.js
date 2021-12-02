@@ -1,3 +1,5 @@
+import { HYDRATE } from "next-redux-wrapper";
+
 import {
   GET_PRODUCTS_REQUEST,
   GET_PRODUCTS_SUCCESS,
@@ -12,12 +14,16 @@ const initialState = {
 
 const productReducer = (state = initialState, action) => {
   switch (action.type) {
+    case HYDRATE:
+      return { ...state, ...action.payload };
+
     case GET_PRODUCTS_REQUEST:
       return {
         ...state,
         isLoading: true,
         isLoaded: false,
       };
+
     case GET_PRODUCTS_SUCCESS:
       return {
         ...state,
@@ -25,6 +31,7 @@ const productReducer = (state = initialState, action) => {
         isLoaded: true,
         products: action.payload.products,
       };
+
     case GET_PRODUCTS_FAILURE:
       return {
         ...state,
@@ -32,6 +39,7 @@ const productReducer = (state = initialState, action) => {
         isLoading: false,
         isLoaded: false,
       };
+      
     default:
       return state;
   }

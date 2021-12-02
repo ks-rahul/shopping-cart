@@ -1,14 +1,30 @@
 import Head from "next/head";
 import Link from "next/link";
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/router";
 
 import { toggleCartPopup } from "../redux/actions/cart.actions";
+import { signOut } from "../redux/actions/auth.actions";
 
 import CartPreview from "./Cart.Preview";
 
-function Layout({ title, children, cartBounce }) {
+function Layout({ title, children }) {
+  const [session, setSession] = useState(null);
+
   const dispatch = useDispatch();
+  const router = useRouter();
+
+  const authSelector = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    let tc = localStorage.getItem("user");
+    if (tc) {
+      setSession(tc);
+    } else {
+      setSession(null);
+    }
+  }, [authSelector]);
 
   const cartItems = useSelector((state) => state.cart.items);
   const cartQuantity = cartItems.length;
@@ -19,6 +35,12 @@ function Layout({ title, children, cartBounce }) {
   const handleCartButton = (e) => {
     e.preventDefault();
     dispatch(toggleCartPopup());
+  };
+
+  const handleSignOut = (e) => {
+    e.preventDefault();
+    dispatch(signOut());
+    router.push("/login");
   };
 
   return (
@@ -51,15 +73,34 @@ function Layout({ title, children, cartBounce }) {
               id="navigationBar"
             >
               <ul className="navbar-nav ml-auto">
+                {session && (
+                  <li className="nav-item">
+                    <Link href="/">
+                      <a className="nav-link">Shop</a>
+                    </Link>
+                  </li>
+                )}
+                {session && (
+                  <li className="nav-item">
+                    <Link href="/checkout">
+                      <a className="nav-link">Checkout</a>
+                    </Link>
+                  </li>
+                )}
                 <li className="nav-item">
-                  <Link href="/">
-                    <a className="nav-link active">Home</a>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link href="/login">
-                    <a className="nav-link">Login</a>
-                  </Link>
+                  {session ? (
+                    <a
+                      className="nav-link"
+                      style={{ cursor: "pointer" }}
+                      onClick={handleSignOut}
+                    >
+                      Log Out
+                    </a>
+                  ) : (
+                    <Link href="/login">
+                      <a className="nav-link">Login</a>
+                    </Link>
+                  )}
                 </li>
               </ul>
 
