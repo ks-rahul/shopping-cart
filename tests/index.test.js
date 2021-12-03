@@ -6,7 +6,7 @@ import Index from "../pages/index";
 describe("Index page", () => {
   it("should render", () => {
     render(<Index />);
-    // const main = screen.getByRole("Loading");
-    // expect(main).toBeInTheDocument();
+    const main = screen.getByRole("Loading");
+    expect(main).toBeInTheDocument();
   });
 });
