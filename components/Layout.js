@@ -45,6 +45,8 @@ function Layout({ title, children }) {
 
   return (
     <Fragment>
+      {console.log(title, " page start", performance.now())}
+
       <Head>
         <meta charSet="UTF-8" />
         <title>{title}</title>
@@ -73,6 +75,11 @@ function Layout({ title, children }) {
               id="navigationBar"
             >
               <ul className="navbar-nav ml-auto">
+                <li className="nav-item">
+                  <Link href="/about">
+                    <a className="nav-link">About</a>
+                  </Link>
+                </li>
                 {session && (
                   <li className="nav-item">
                     <Link href="/">
@@ -132,7 +139,16 @@ function Layout({ title, children }) {
                     alt="Cart"
                   />
                   {cartQuantity ? (
-                    <span className="cart-count">{cartQuantity}</span>
+                    <span
+                      className="cart-count"
+                      style={{
+                        position: "absolute",
+                        left: "10px",
+                        top: "10px",
+                      }}
+                    >
+                      {cartQuantity}
+                    </span>
                   ) : (
                     ""
                   )}
@@ -149,6 +165,8 @@ function Layout({ title, children }) {
           Copyrights &copy; 2021.
         </div>
       </footer>
+
+      {console.log(title, " page end", performance.now())}
     </Fragment>
   );
 }

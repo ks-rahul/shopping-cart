@@ -61,7 +61,7 @@ const CartPreview = () => {
                   {product.quantity === 1 ? "x" : "-"}
                 </button>
                 <span>{`${product.quantity} ${
-                  product.quantity > 1 ? "Nos." : "No."
+                  product.quantity > 1 ? " Nos." : " No."
                 }`}</span>
                 <button
                   type="button"

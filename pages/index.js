@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { connect } from "react-redux";
 
+import ErrorBoundary from "../components/ErrorBoundaries";
 import Layout from "../components/Layout";
 import ProductCard from "../components/ProductCard";
 
@@ -14,28 +15,24 @@ function Home({ getProductsList, products }) {
     if (products.length === 0) {
       getProductsList();
     }
-  }, [getProductsList, products.length]);
-
-  useEffect(() => {
-    let tc = localStorage.getItem("user");
-    if (!tc) {
-      router.push("/login");
-    }
-  }, [router]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Layout title="Home">
-      {products.length === 0 ? (
-        <h1>Loading...</h1>
-      ) : (
-        <div className="products-wrapper">
-          <div className="products">
-            {products.map((p) => (
-              <ProductCard key={p.id} item={p} />
-            ))}
+      <ErrorBoundary fallback={<h1>Something went wrong!</h1>}>
+        {products.length === 0 ? (
+          <h1>Loading...</h1>
+        ) : (
+          <div className="products-wrapper">
+            <div className="products">
+              {products.map((p) => (
+                <ProductCard key={p.id} item={p} />
+              ))}
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </ErrorBoundary>
     </Layout>
   );
 }
