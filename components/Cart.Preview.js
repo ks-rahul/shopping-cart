@@ -18,7 +18,9 @@ const CartPreview = () => {
   const toggleCart = () => dispatch(toggleCartPopup());
 
   const handleRemove = (productId) => {
-    dispatch(removeFromCart(productId));
+    if (confirm("Are you sure you want to delete this item.")) {
+      dispatch(removeFromCart(productId));
+    }
   };
 
   const handleAddExisting = (productId) => {
@@ -51,7 +53,6 @@ const CartPreview = () => {
                   className={`btn btn-${
                     product.quantity === 1 ? "danger" : "primary"
                   }`}
-                  disabled={product.quantity === 1}
                   onClick={() => {
                     product.quantity === 1
                       ? handleRemove(product.id)

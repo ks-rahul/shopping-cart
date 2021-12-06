@@ -1,7 +1,6 @@
 import Layout from "../components/Layout";
 
 function About({ userData }) {
-  console.log("sadsad", userData);
 
   return (
     <Layout title="About us">

@@ -41,7 +41,9 @@ function Checkout() {
   };
 
   const handleRemove = (productId) => {
-    dispatch(removeFromCart(productId));
+    if (confirm("Are you sure you want to delete this item.")) {
+      dispatch(removeFromCart(productId));
+    }
   };
 
   const handleRemoveExisting = (productId) => {
@@ -49,7 +51,7 @@ function Checkout() {
   };
 
   const handleMakePayment = () => {
-    alert("Order PLaced Successfully!");
+    alert("Order Placed Successfully!");
     dispatch(clearCart());
   };
 

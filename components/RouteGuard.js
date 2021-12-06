@@ -26,7 +26,7 @@ function RouteGuard({ children }) {
   }, []);
 
   function authCheck(url) {
-    const publicPaths = ["/login"];
+    const publicPaths = ["/login", "/about"];
 
     const path = url.split("?")[0];
     if (!localStorage.getItem("user") && !publicPaths.includes(path)) {
