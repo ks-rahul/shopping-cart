@@ -25,6 +25,7 @@ function Home({ getProductsList, products }) {
           <h1>Loading...</h1>
         ) : (
           <div className="products-wrapper">
+            <h1>Home</h1>
             <div className="products">
               {products.map((p) => (
                 <ProductCard key={p.id} item={p} />
